@@ -1,10 +1,11 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 class Profile(models.Model):
     name = models.CharField(max_length=30)
     profile_pic = models.ImageField(upload_to='posts/', blank = 'true')
     bio = models.TextField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE, default='', null=True)
 
     def save_profile(self):
         self.save
@@ -13,13 +14,14 @@ class Profile(models.Model):
         self.delete()
 
     def __str__(self):
-     return f'{self.username}Profile'    
+     return f'{self.user.name}Profile'    
 
 
 class Post(models.Model):
     image = models.ImageField(upload_to='posts/', blank=True)
     title = models.CharField(max_length=30)
     caption = models.TextField(max_length=300)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default='', null=True ,related_name='author')
     # pub_date = models.DateTimeField(auto_now_add=True,default='')
 
     @classmethod
