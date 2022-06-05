@@ -34,9 +34,12 @@ class Post(models.Model):
 
     def delete_post(self):
         self.delete()
-
+    
+    @classmethod
     def search_by_title(cls,search_term):
-        insta=cls.objects.filter(title_icontains=search_term)    
+        insta=cls.objects.filter(title__icontains=search_term)
+        return insta
+
 
     def __str__(self):
         return self.title    
