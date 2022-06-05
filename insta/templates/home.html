@@ -1,1 +1,48 @@
-<h1>karibu instagram</h1>
+{% extends 'base.html' %}
+{%block content%}
+{{ block.super}}
+
+<div>
+  <div class="container" style="margin-top: 100px;">
+    {%for post in posts %}
+    <div>
+      <div class="row">
+
+        <div class="col-md-8  m-auto card">
+          <a href="profile">
+            <img width="50px" height="50px" style="border-radius: 50%;" class="img img-circle" src="{{post.avatar}}"
+              alt="{{post.author}}" srcset="">
+            <span><b>{{post.author}}</b></span>
+          </a>
+
+
+
+          <div class="card mb-3">
+            <img src="{{post.image}}" class="img-responsive card-img-top" alt="">
+          </div>
+
+          <div class="card-body">
+
+            <h3>{{post.name}}</h3>
+            <p> <b>{{post.author}} </b>{{post.caption}}</p>
+          </div>
+
+          <div class="card-footer">
+         <a href=""> <span class="info"><i class="far fa-heart fa-1x" ></i></span>  </a>
+       <a href=""><i class="far fa-comment"></i></a>  
+
+            <a href=""><i class="far fa-paper-plane"></i></a>
+
+          </div>
+        </div>
+      </div>
+    </div><br><br>
+  </div>
+
+  {% endfor %}
+</div>
+</div>
+
+
+
+{%endblock%}
