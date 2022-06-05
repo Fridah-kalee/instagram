@@ -18,7 +18,7 @@ class Profile(models.Model):
 
 
 class Post(models.Model):
-    image = models.ImageField(upload_to='posts/', blank=True)
+    image = models.ImageField(upload_to='post/', blank=True)
     title = models.CharField(max_length=30)
     caption = models.TextField(max_length=300)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default='', null=True ,related_name='author')
@@ -34,6 +34,9 @@ class Post(models.Model):
 
     def delete_post(self):
         self.delete()
+
+    def search_by_title(cls,search_term):
+        insta=cls.objects.filter(title_icontains=search_term)    
 
     def __str__(self):
         return self.title    
