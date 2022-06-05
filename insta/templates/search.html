@@ -14,9 +14,17 @@
 
   {% if posts %}
     {% for post in posts %}
-      <div class="col-sm-6 col-md-3">
+      <!-- <div class="col-sm-6 col-md-3">
           <h1>{{post.title}}</h1>
-      </div>
+      </div> -->
+      <div class="panel panel-default">
+        <div class="panel-body">
+            <a href=""data-target="#staticBackdrop{{post.image}}">
+                <img src="{{post.post.url}}" class="img-responsive styled" alt="cant show"></a>
+        </div>
+        <div class="panel-footer text-center"><b>{{post.title}}</b></div>
+    </div>
+    </div>
     {% endfor %}
   {% endif %}
    </div>
