@@ -74,6 +74,7 @@ TEMPLATES = [
     },
 ]
 
+LOGOUT_REDIRECT_URL = 'login/'
 WSGI_APPLICATION = 'instagram.wsgi.application'
 
 

@@ -7,16 +7,12 @@
     {%for post in posts %}
     <div>
       <div class="row">
-
         <div class="col-md-8  m-auto card">
           <a href="profile">
             <img width="50px" height="50px" style="border-radius: 50%;" class="img img-circle" src="{{post.avatar}}"
               alt="{{post.author}}" srcset="">
-            <span><b>{{post.author}}</b></span>
+            <!-- <span><b>{{post.author}}</b></span> -->
           </a>
-
-
-
           <div class="card mb-3">
             <img src="{{post.image}}" class="img-responsive card-img-top" alt="">
           </div>
@@ -42,7 +38,4 @@
   {% endfor %}
 </div>
 </div>
-
-
-
 {%endblock%}
