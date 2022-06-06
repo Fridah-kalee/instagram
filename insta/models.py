@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tinymce.models import HTMLField
 # Create your models here.
 class Profile(models.Model):
     name = models.CharField(max_length=30)
@@ -23,6 +24,7 @@ class Post(models.Model):
     caption = models.TextField(max_length=300)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default='', null=True ,related_name='author')
     # pub_date = models.DateTimeField(auto_now_add=True,default='')
+    post = HTMLField()
 
     @classmethod
     def all_posts(cls) :
