@@ -8,7 +8,9 @@ urlpatterns=[
     re_path(r'^search/',views.search_results,name='search_results'),
     re_path(r'^post/',views.post,name='post'),
     re_path('accounts/register/', views.register, name='register'),
-    re_path('profile/',views.profile,name='profile')
+    re_path('profile/',views.profile,name='profile'),
+    # re_path("likes/<int:pk/>",views.likes, name='likes'),
+    re_path(r'^likes/(?P<pk>\d+)/', views.likes, name = "likes"),
 ]
 
 if settings.DEBUG:

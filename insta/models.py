@@ -7,7 +7,7 @@ class Profile(models.Model):
     profile_pic = models.ImageField(upload_to='post/', blank = 'true')
     bio = models.TextField()
     user = models.OneToOneField(User, on_delete=models.CASCADE, default='', null=True)
-
+ 
     def save_profile(self):
         self.save
 
@@ -23,6 +23,7 @@ class Post(models.Model):
     title = models.CharField(max_length=30)
     caption = models.TextField(max_length=300)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default='', null=True ,related_name='author')
+    likes=models.IntegerField(null=True, default=0)
     # pub_date = models.DateTimeField(auto_now_add=True,default='')
     # post = HTMLField()
 
@@ -44,4 +45,7 @@ class Post(models.Model):
 
 
     def __str__(self):
-        return self.title    
+        return self.title 
+
+    
+   

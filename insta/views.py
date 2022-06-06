@@ -5,7 +5,7 @@ from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from .forms import NewPostForm,SignUpForm,ProfileUpdateForm
-
+from django.urls import reverse
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def home(request):
@@ -31,8 +31,6 @@ def home(request):
 
 def profile(request):
     if request.method == 'POST':
-
-        
         profile_form = ProfileUpdateForm(
             request.POST, request.FILES, instance=request.user)
 
@@ -43,36 +41,26 @@ def profile(request):
             return redirect('home')
 
     else:
-        
         profile_form = ProfileUpdateForm(instance=request.user)
-        
-
         context = {
             
             'profile_form': profile_form
-
         }
 
     return render(request, 'profile.html', context)
 
 def profile_update(request):
     if request.method == 'POST':
-
-        
         profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
 
         if profile_form.is_valid():
-            
             profile_form.save()
-
-            return redirect('home')
+            return redirect('profile')
 
     else:
-        
         profile_form = ProfileUpdateForm(instance=request.user)
 
         context = {
-            
             'profile_form': profile_form
 
         }
@@ -121,3 +109,10 @@ def register(request):
     else:
         form = SignUpForm()
     return render(request, 'django_registration/registration_form.html', {'form': form})    
+
+def likes(request,pk):
+    # post = Post.objects.get(pk=pk)
+    post=get_object_or_404(Post, id=pk)
+    post.likes+=1
+    post.save()
+    return redirect('home')
