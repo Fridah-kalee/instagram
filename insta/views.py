@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from .models import Profile,Post
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
-# from .forms import SignUpForm
+from django.contrib.auth import authenticate, login, logout
+from .forms import NewPostForm
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -41,3 +42,19 @@ def search_results(request):
         message = "You haven't searched for any term"
         return render(request,'search.html',{"message":message})    
 
+def post(request):
+    current_user = request.user
+   
+    if request.method == 'POST':
+        form = NewPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.user = current_user
+           
+            image.save()
+            
+        return redirect('home')
+
+    else:
+        form = NewPostForm()
+    return render(request, 'post.html', {"form": form})

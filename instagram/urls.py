@@ -22,6 +22,6 @@ urlpatterns = [
     re_path('admin/', admin.site.urls),
     re_path(r'',include('insta.urls')),
     re_path(r'^accounts/',include('django_registration.backends.one_step.urls')),
-    re_path(r'^logout/$',views.logout,{"next_page":'/'}),
+    re_path('accounts/', include('django.contrib.auth.urls')),
     re_path('^tinymce/', include('tinymce.urls')),
 ]
