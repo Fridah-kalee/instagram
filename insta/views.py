@@ -110,9 +110,9 @@ def register(request):
         form = SignUpForm()
     return render(request, 'django_registration/registration_form.html', {'form': form})    
 
-def likes(request,pk):
-    # post = Post.objects.get(pk=pk)
-    post=get_object_or_404(Post, id=pk)
-    post.likes+=1
-    post.save()
-    return redirect('home')
+# def likes(request,pk):
+#     # post = Post.objects.get(pk=pk)
+#     post=get_object_or_404(Post, id=pk)
+#     post.likes+=1
+#     post.save()
+#     return redirect('home')
