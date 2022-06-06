@@ -24,7 +24,7 @@ class Post(models.Model):
     caption = models.TextField(max_length=300)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default='', null=True ,related_name='author')
     # pub_date = models.DateTimeField(auto_now_add=True,default='')
-    post = HTMLField()
+    # post = HTMLField()
 
     @classmethod
     def all_posts(cls) :
