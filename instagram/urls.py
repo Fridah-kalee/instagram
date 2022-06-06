@@ -18,5 +18,6 @@ from django.urls import re_path,include
 
 urlpatterns = [
     re_path('admin/', admin.site.urls),
-    re_path(r'',include('insta.urls'))
+    re_path(r'',include('insta.urls')),
+    re_path(r'^accounts/',include('django.contrib.auth.urls')),
 ]
