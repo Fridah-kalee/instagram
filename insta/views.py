@@ -2,9 +2,11 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Profile,Post
 from .email import send_welcome_email
+from django.contrib.auth.decorators import login_required
 # from .forms import SignUpForm
 
 # Create your views here.
+@login_required(login_url='/accounts/login/')
 def home(request):
     posts = Post.all_posts()
     a_posts = []
