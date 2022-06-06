@@ -4,13 +4,18 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Post,Profile
 
 class SignUpForm(UserCreationForm):
-    your_name = forms.CharField(max_length=50)
+    username = forms.CharField(max_length=50)
     email = forms.CharField(max_length=60)
 
     class Meta:
         model = User
-        fields = ('your_name','email','password','password1')
+        fields = ('username','email','password1','password2')
 class  NewPostForm(forms.ModelForm):
     class Meta:
         model = Post
         exclude = ['user','profile',]
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields =['profile_pic']        

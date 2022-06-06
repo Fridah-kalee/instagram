@@ -4,7 +4,7 @@ from .models import Profile,Post
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .forms import NewPostForm,SignUpForm
+from .forms import NewPostForm,SignUpForm,ProfileUpdateForm
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -28,6 +28,56 @@ def home(request):
 
         a_posts.append(obj)
     return render(request,'home.html',{"posts":a_posts})
+
+def profile(request):
+    if request.method == 'POST':
+
+        
+        profile_form = ProfileUpdateForm(
+            request.POST, request.FILES, instance=request.user)
+
+        if  profile_form.is_valid():
+           
+            profile_form.save()
+
+            return redirect('home')
+
+    else:
+        
+        profile_form = ProfileUpdateForm(instance=request.user)
+        
+
+        context = {
+            
+            'profile_form': profile_form
+
+        }
+
+    return render(request, 'profile.html', context)
+
+def profile_update(request):
+    if request.method == 'POST':
+
+        
+        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
+
+        if profile_form.is_valid():
+            
+            profile_form.save()
+
+            return redirect('home')
+
+    else:
+        
+        profile_form = ProfileUpdateForm(instance=request.user)
+
+        context = {
+            
+            'profile_form': profile_form
+
+        }
+
+    return render(request, 'profile_update.html', context)
 
 def search_results(request):
 
@@ -67,7 +117,6 @@ def register(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            login(request, user)
             return redirect('home')
     else:
         form = SignUpForm()

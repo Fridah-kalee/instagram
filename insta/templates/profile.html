@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{%load crispy_forms_tags%}
+
+{%block content%}
+<div class="col-sm-6 m-auto card">
+    <div class="container" style="padding-top: 100px;"></div>
+    <div class="media">
+        <div class="col-sm-4">
+            <div class="col-sm-10 col-md-4 text-center">
+                {% if user.profile.pic%}
+                <img src="../../media/{{user.profile.pic}}" alt="" height="180px" width="180px" class="profile-pic">
+                {% else %}
+                <img src="../../media/post/images_4.jpeg" alt="" height="180px" width="180px" class="profile-pic">
+                {% endif %}
+            </div>
+            <div style="width: 150px; height:150px; overflow:hidden; border-radius:50%" class="img-wrapper">
+                <img width="120%" height="120%" src="{{user.profile.profile_pic.url }}" alt="profile">
+            </div>
+        </div>
+        <div class="media-body">
+            <h2 class="account-heading">{{user.username}}</h2>
+            
+            <p>{{user.profile.bio}}</p>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data" >
+            {%csrf_token%}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Profile info</legend>
+                
+                {{ profile_form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">update</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+</div>
+{%endblock content%}
