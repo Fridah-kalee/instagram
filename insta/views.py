@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Profile,Post
+from .email import send_welcome_email
 # from .forms import SignUpForm
 
 # Create your views here.
