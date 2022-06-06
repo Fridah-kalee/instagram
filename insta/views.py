@@ -4,7 +4,7 @@ from .models import Profile,Post
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from .forms import NewPostForm
+from .forms import NewPostForm,SignUpForm
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
@@ -58,3 +58,17 @@ def post(request):
     else:
         form = NewPostForm()
     return render(request, 'post.html', {"form": form})
+
+def register(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = SignUpForm()
+    return render(request, 'django_registration/registration_form.html', {'form': form})    

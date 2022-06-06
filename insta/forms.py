@@ -1,10 +1,15 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from .models import Post,Profile
 
-# class SignUpForm(forms.Form):
-#     your_name=forms.CharField(label='First Name',max_length=30)
-#     email=forms.EmailField(label='Email')
+class SignUpForm(UserCreationForm):
+    your_name = forms.CharField(max_length=50)
+    email = forms.CharField(max_length=60)
+
+    class Meta:
+        model = User
+        fields = ('your_name','email','password','password1')
 class  NewPostForm(forms.ModelForm):
     class Meta:
         model = Post
