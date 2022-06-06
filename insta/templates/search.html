@@ -20,9 +20,9 @@
       <div class="panel panel-default">
         <div class="panel-body">
             <a href=""data-target="#staticBackdrop{{post.image}}">
-                <img src="{{post.post.url}}" class="img-responsive styled" alt="cant show"></a>
+                <img src="{{post.image.url}}" class="img-responsive styled" style="height: 50%;width: 50%;"></a>
         </div>
-        <div class="panel-footer text-center"><b>{{post.title}}</b></div>
+        <div class="panel-footer"><b>{{post.user}}~</b>{{post.title}}{{post.caption}}</div>
     </div>
     </div>
     {% endfor %}
